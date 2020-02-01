@@ -15,17 +15,17 @@ void initScene_Game()
     // load background
     ind = TILE_USERINDEX;
     VDP_drawImageEx(
-        BPLAN,
-        &bg_b,
-        TILE_ATTR_FULL(PAL0, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
-    ind += bg_a.tileset->numTile;
-
-   VDP_drawImageEx(
         APLAN,
         &bg_a,
         TILE_ATTR_FULL(PAL0, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
+    ind += bg_a.tileset->numTile;
+#if 1
+   VDP_drawImageEx(
+        BPLAN,
+        &bg_b,
+        TILE_ATTR_FULL(PAL1, TRUE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
     ind += bg_b.tileset->numTile;
-
+#endif
 
     // VDP process done, we can re enable interrupts
     SYS_enableInts();
@@ -37,8 +37,8 @@ void initScene_Game()
 
 
     // prepare palettes
-    memcpy(&palette[0], bg_b.palette->data, 16);
-    memcpy(&palette[16], bg_a.palette->data, 16);
+    memcpy(&palette[0], bg_a.palette->data, 16);
+    memcpy(&palette[16], bg_b.palette->data, 16);
     memcpy(&palette[32], cg_sprites.palette->data, 16);
 //    memcpy(&palette[48], spr_boy01.palette->data, 16);
 

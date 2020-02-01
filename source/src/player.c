@@ -9,22 +9,10 @@
 /*
     ÉèÅ[ÉN
 */
-fix32 camposx;
-fix32 camposy;
 fix32 posx;
 fix32 posy;
-fix32 movx;
-fix32 movy;
-s16 xorder;
-s16 yorder;
-
 
 void handleInput();
-void updatePhysic();
-void updateCamera(fix32 x, fix32 y);
-void updateAnim();
-void updateCamera(fix32 x, fix32 y);
-Sprite* sprPlayer = NULL;
 
 /*
     èâä˙âª
@@ -72,27 +60,19 @@ void handleInput()
 {
     u16 padinfo = JOY_readJoypad(JOY_1);
 
-    if (padinfo & BUTTON_UP)
-        yorder = -1;
-    else if (padinfo & BUTTON_DOWN)
-        yorder = +1;
-    else
-        yorder = 0;
-
     if (padinfo & BUTTON_LEFT)
-        xorder = -1;
+
     else if (padinfo & BUTTON_RIGHT)
-        xorder = +1;
     else
         xorder = 0;
 
 
     if (padinfo & BUTTON_A){
-        SND_startPlay_XGM(bgm_game);
+//        SND_startPlay_XGM(bgm_game);
     }
 
     if (padinfo & BUTTON_B){
-        SND_playSfx_VGM(se_bullet, sizeof(se_bullet));
+//        SND_playSfx_VGM(se_bullet, sizeof(se_bullet));
     }
 }
 
