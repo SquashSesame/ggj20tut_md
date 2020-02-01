@@ -53,16 +53,31 @@
 		<Unit filename="res/SE01_tank_ballet.vgm" />
 		<Unit filename="res/SE02_repair.vgm" />
 		<Unit filename="res/SE03_repair_fall.vgm" />
+		<Unit filename="res/bga.png" />
 		<Unit filename="res/bgcg.png" />
+		<Unit filename="res/bgm01_gameplay_beta.vgm" />
 		<Unit filename="res/gfx.h" />
 		<Unit filename="res/gfx.res" />
+		<Unit filename="res/ggj_logo.png" />
 		<Unit filename="res/music.h" />
 		<Unit filename="res/music.res" />
 		<Unit filename="res/sprites.png" />
-		<Unit filename="res/testtone04.vgm" />
 		<Unit filename="src/main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="src/main.h" />
+		<Unit filename="src/player.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/player.h" />
+		<Unit filename="src/scene_game.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/scene_game.h" />
+		<Unit filename="src/scene_logo.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/scene_logo.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
