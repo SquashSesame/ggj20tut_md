@@ -62,9 +62,10 @@ int main()
     VDP_setScreenWidth320();
 
     // start music
-    SND_startPlay_XGM(testtone_music);
+//    SND_startPlay_XGM(test00_music);
+//    SND_startPlay_XGM(test01_music);
+    SND_startPlay_XGM(bgm_game);
 
-    // init sprites engine
     SPR_init(256);
 
     // set all palette to black
@@ -74,15 +75,18 @@ int main()
     ind = TILE_USERINDEX;
     VDP_drawImageEx(
         BPLAN,
-        &bgb_image,
+        &cg_bgcg,
         TILE_ATTR_FULL(PAL0, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
-    ind += bgb_image.tileset->numTile;
+    ind += cg_bgcg.tileset->numTile;
 
+#if 0
     VDP_drawImageEx(
         APLAN,
         &bga_image,
         TILE_ATTR_FULL(PAL1, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
     ind += bga_image.tileset->numTile;
+#endif
+
 
     // VDP process done, we can re enable interrupts
     SYS_enableInts();
@@ -101,16 +105,17 @@ int main()
 
     // init sonic sprite
     SPR_initSprite(&sprites[0],
-                   &sonic_sprite,
+                   &cg_sprites,
                    fix32ToInt(posx - camposx),
                    fix32ToInt(posy - camposy),
                    TILE_ATTR(PAL2, TRUE, FALSE, FALSE));
     SPR_update(sprites, 1);
 
     // prepare palettes
-    memcpy(&palette[0], bgb_image.palette->data, 16);
-//    memcpy(&palette[16], bga_image.palette->data, 16 * 2);
-//    memcpy(&palette[32], sonic_sprite.palette->data, 16 * 2);
+//    memcpy(&palette[0], bgb_image.palette->data, 16);
+//    memcpy(&palette[16], bga_image.palette->data, 16);
+    memcpy(&palette[32], cg_sprites.palette->data, 16);
+//    memcpy(&palette[48], spr_boy01.palette->data, 16);
 
     // fade in
     VDP_fadeIn(0, (3 * 16) - 1, palette, 20, FALSE);
@@ -135,7 +140,7 @@ int main()
 
 static void updatePhysic()
 {
-#if 0
+#if 1
     if (xorder > 0)
     {
         movx += ACCEL;
@@ -266,7 +271,7 @@ static void updateAnim()
 
 static void updateCamera(fix32 x, fix32 y)
 {
-#if 0
+#if 1
     if ((x != camposx) || (y != camposy))
     {
         camposx = x;
