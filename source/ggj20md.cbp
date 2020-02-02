@@ -53,6 +53,8 @@
 		<Unit filename="res/SE01_tank_ballet.vgm" />
 		<Unit filename="res/SE02_repair.vgm" />
 		<Unit filename="res/SE03_repair_fall.vgm" />
+		<Unit filename="res/bg_a.png" />
+		<Unit filename="res/bg_b.png" />
 		<Unit filename="res/bga.png" />
 		<Unit filename="res/bgcg.png" />
 		<Unit filename="res/bgm01_gameplay_beta.vgm" />
@@ -62,6 +64,9 @@
 		<Unit filename="res/music.h" />
 		<Unit filename="res/music.res" />
 		<Unit filename="res/sprites.png" />
+		<Unit filename="src/bullet.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="src/main.c">
 			<Option compilerVar="CC" />
 		</Unit>

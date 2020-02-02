@@ -5,6 +5,8 @@
 #include "music.h"
 #include "main.h"
 
+void updateBG(int x, int y);
+
 void initScene_Game()
 {
     // start music
@@ -48,10 +50,28 @@ void initScene_Game()
 void updateScene_Game()
 {
     updatePlayer();
-
+    updateBG(0, -30);
 }
 
 void exitScene_Game()
 {
+}
+
+int scrBG_X =0;
+int scrBG_Y =0;
+
+void updateBG(int addx, int addy)
+{
+#if 1
+//s    if ((x != camposx) || (y != camposy))
+    {
+        scrBG_X += addx;
+        scrBG_Y += addy;
+        VDP_setHorizontalScroll(PLAN_A, (int)(scrBG_X>>8));
+//        VDP_setHorizontalScroll(PLAN_B, fix32ToInt(-camposx) >> 3);
+        VDP_setVerticalScroll(PLAN_A, (int)(scrBG_Y>>8));
+//        VDP_setVerticalScroll(PLAN_B, fix32ToInt(camposy) >> 3);
+    }
+#endif
 }
 
