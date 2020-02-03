@@ -4,6 +4,8 @@
 #include "gfx.h"
 #include "music.h"
 #include "main.h"
+#include "player.h"
+#include "player_heri.h"
 
 void updateBG(int x, int y);
 
@@ -19,38 +21,37 @@ void initScene_Game()
     VDP_drawImageEx(
         APLAN,
         &bg_a,
-        TILE_ATTR_FULL(PAL0, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
+        TILE_ATTR_FULL(PAL0, FALSE, FALSE, FALSE, ind),
+        0, 0, FALSE, TRUE);
     ind += bg_a.tileset->numTile;
 #if 1
    VDP_drawImageEx(
         BPLAN,
         &bg_b,
-        TILE_ATTR_FULL(PAL1, TRUE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
+        TILE_ATTR_FULL(PAL1, TRUE, FALSE, FALSE, ind),
+        0, 0, FALSE, TRUE);
     ind += bg_b.tileset->numTile;
 #endif
 
-    // VDP process done, we can re enable interrupts
-    SYS_enableInts();
-
-// init scrolling
-//    updateCamera(FIX32(0), FIX32(0));
-
-    initPlayer();
-
+    initPlayer_Heri(2mmmmmmm, 9);
+    initPlayer(0, 0);
 
     // prepare palettes
-    memcpy(&palette[0], bg_a.palette->data, 16);
-    memcpy(&palette[16], bg_b.palette->data, 16);
-    memcpy(&palette[32], cg_sprites.palette->data, 16);
-//    memcpy(&palette[48], spr_boy01.palette->data, 16);
+    memcpy(&palette[0], bg_a.palette->data, 16*2);
+    memcpy(&palette[16], bg_b.palette->data, 16*2);
+    memcpy(&palette[32], cg_sprites.palette->data, 16*2);
+    memcpy(&palette[48], cg_sprites.palette->data, 16*2);
 
-
+    // VDP process done, we can re enable interrupts
+    SYS_enableInts();
 }
 
 void updateScene_Game()
 {
+    updatePlayer_Heri();
     updatePlayer();
-    updateBG(0, -30);
+
+    updateBG(0, -40);
 }
 
 void exitScene_Game()

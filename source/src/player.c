@@ -6,12 +6,11 @@
 #include "main.h"
 
 
-/*
-    ÉèÅ[ÉN
-*/
-fix32 posx;
-fix32 posy;
-int   dirMissile = 2;
+fix32   posx;
+fix32   posy;
+int     dirMissile = 2;
+int     tank_sprno;
+int     tank_animno;
 
 typedef struct {
     int     animno;
@@ -27,24 +26,14 @@ sMissile missileTbl[6] =
     { /*anim*/3, /*vx*/0.0f, /*vy*/-1.0f },
     { /*anim*/4, /*vx*/0.5f, /*vy*/-0.5f },
     { /*anim*/5, /*vx*/1.0f, /*vy*/0.0f },
-    //Å@END
+    //ÔøΩ@END
     { 0, 0,0   }
 };
 
 
-void handleInput();
+static void handleInput();
 #define REVSERV_SPNO 4
 #define MAX_BULLET  20
-typedef struct {
-    u8      isAlive;
-    u8      spno;
-    s8      time;
-    u8      p2;
-    fix32   px;
-    fix32   py;
-    fix32   vx;
-    fix32   vy;
-} sBullet;
 sBullet bulletList[MAX_BULLET];
 
 sBullet* FindBlankBullet(){
@@ -58,7 +47,7 @@ sBullet* FindBlankBullet(){
     return NULL;
 }
 
-void updateBullet()
+static void updateBullet()
 {
     s16 i;
     for (i=0 ;i<MAX_BULLET ; ++i)
@@ -83,64 +72,73 @@ void updateBullet()
     }
 }
 
-/*
-    èâä˙âª
-*/
-void initPlayer()
+void initPlayer(int sprno, int animno)
 {
+    tank_sprno = sprno;
+    tank_animno = animno;
+
     posx = FIX32(100);
     posy = MAX_POSY;
-
+#if 1
     // init sonic sprite
     SPR_initSprite(
-        &sprites[0],
+        &sprites[tank_sprno],
         &cg_sprites,
         fix32ToInt(posx),
         fix32ToInt(posy),
         TILE_ATTR(PAL2, FALSE, FALSE, FALSE));
-    SPR_setAnim(&sprites[0], 0);
-
+//        TILE_ATTR_FULL(PAL2, TRUE, FALSE, FALSE, 0));
+    SPR_setAnim(&sprites[tank_sprno], tank_animno);
+//    SPR_setAlwaysVisible(&sprites[tank_sprno+1], TRUE);
+#endif
+#if 1
     // init sonic sprite
     SPR_initSprite(
-        &sprites[1],
+        &sprites[tank_sprno+1],
         &cg_sprites,
         fix32ToInt(posx),
         fix32ToInt(posy),
-        TILE_ATTR(PAL2, FALSE, FALSE, FALSE));
-    SPR_setAnim(&sprites[1], missileTbl[dirMissile].animno);
+        TILE_ATTR(PAL2, TRUE, FALSE, FALSE));
+//        TILE_ATTR_FULL(PAL2, TRUE, FALSE, FALSE, 0));
+//    SPR_setAlwaysVisible(&sprites[tank_sprno], TRUE);
+    SPR_setAnim(
+        &sprites[tank_sprno+1],
+        missileTbl[dirMissile].animno);
+#endif
 }
-/*
-    ÉvÉåÉCÉÑÅ[à⁄ìÆ
-*/
+
+
 void updatePlayer()
 {
-    handleInput();
-
+//    handleInput();
+#if 1
     // set sprite position
     SPR_setPosition(
-        &sprites[0],
+        &sprites[tank_sprno],
         fix32ToInt(posx),
         fix32ToInt(posy)
     );
+#endif
+#if 1
     SPR_setPosition(
-        &sprites[1],
+        &sprites[tank_sprno+1],
         fix32ToInt(posx),
         fix32ToInt(posy)
     );
-
-    updateBullet();
+#endif
+//    updateBullet();
 }
 
-void handleInput()
+static void handleInput()
 {
     u16 padinfo = JOY_readJoypad(JOY_1);
 
-    if (padinfo & BUTTON_LEFT && dirMissile > 0){
+    if ((padinfo & BUTTON_LEFT) && dirMissile > 0){
         dirMissile--;
-        SPR_setAnim(&sprites[1], missileTbl[dirMissile].animno);
-    } else if (padinfo & BUTTON_RIGHT && dirMissile < MAX_MISSLE){
+        SPR_setAnim(&sprites[tank_sprno+1], missileTbl[dirMissile].animno);
+    } else if ((padinfo & BUTTON_RIGHT) && dirMissile < MAX_MISSLE){
         dirMissile++;
-        SPR_setAnim(&sprites[1], missileTbl[dirMissile].animno);
+        SPR_setAnim(&sprites[tank_sprno+1], missileTbl[dirMissile].animno);
     }
 
 

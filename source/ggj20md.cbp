@@ -50,20 +50,16 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="res/SE01_tank_ballet.vgm" />
-		<Unit filename="res/SE02_repair.vgm" />
-		<Unit filename="res/SE03_repair_fall.vgm" />
 		<Unit filename="res/bg_a.png" />
 		<Unit filename="res/bg_b.png" />
-		<Unit filename="res/bga.png" />
-		<Unit filename="res/bgcg.png" />
-		<Unit filename="res/bgm01_gameplay_beta.vgm" />
+		<Unit filename="res/bgm01_gameplay_final.vgm" />
 		<Unit filename="res/gfx.h" />
 		<Unit filename="res/gfx.res" />
 		<Unit filename="res/ggj_logo.png" />
 		<Unit filename="res/music.h" />
 		<Unit filename="res/music.res" />
 		<Unit filename="res/sprites.png" />
+		<Unit filename="res/title-02.png" />
 		<Unit filename="src/bullet.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -75,6 +71,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src/player.h" />
+		<Unit filename="src/player_heri.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/player_heri.h" />
 		<Unit filename="src/scene_game.c">
 			<Option compilerVar="CC" />
 		</Unit>

@@ -24,9 +24,21 @@
 #define MAX_POSX        FIX32(400)
 #define MAX_POSY        FIX32(156)
 
+#define MAX_SPRITE      80
 
-extern Sprite sprites[256];
+extern Sprite sprites[MAX_SPRITE];
 extern u16 palette[64];
+extern s16 spriteCount;
 
+typedef struct {
+    u8      isAlive;
+    u8      spno;
+    s8      time;
+    u8      p2;
+    fix32   px;
+    fix32   py;
+    fix32   vx;
+    fix32   vy;
+} sBullet;
 
 #endif // MAIN_H_INCLUDED
