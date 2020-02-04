@@ -82,7 +82,8 @@ void funcTankHou(sSprite* spr)
     if ((padinfo & BUTTON_LEFT) && dirMissile > 0){
         dirMissile--;
         spr->animno = missileTbl[dirMissile].animno;
-    } else if ((padinfo & BUTTON_RIGHT) && dirMissile < MAX_MISSLE){
+    }
+    else if ((padinfo & BUTTON_RIGHT) && dirMissile < (MAX_MISSLE-1)){
         dirMissile++;
         spr->animno = missileTbl[dirMissile].animno;
     }
@@ -102,7 +103,7 @@ void funcTankHou(sSprite* spr)
 void initPlayer(int animno)
 {
     sprTank = CreateSprite(animno, FIX32(100), FIX32(156), funcTank);
-    sprTankHoh = CreateSprite(animno, FIX32(100), FIX32(156), funcTankHou);
+    sprTankHoh = CreateSprite(animno+1, FIX32(100), FIX32(156), funcTankHou);
     dirMissile = 2;
 }
 

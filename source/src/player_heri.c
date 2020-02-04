@@ -4,12 +4,12 @@
 #include "music.h"
 #include "player.h"
 
-#define LIMIT_LEFT      32
-#define LIMIT_RIGHT     260
-#define LIMIT_UP        32
-#define LIMIT_BOTTOM    200
+#define LIMIT_LEFT      FIX32(32)
+#define LIMIT_RIGHT     FIX32(260)
+#define LIMIT_UP        FIX32(32)
+#define LIMIT_BOTTOM    FIX32(200)
 
-#define ACCELL  0.05f
+#define ACCELL  FIX32(0.01f)
 
 fix32   posx;
 fix32   posy;
@@ -69,23 +69,25 @@ void FuncHeri(sSprite* spr)
 
     if (padinfo & BUTTON_LEFT){
         spr->vx -= ACCELL;
-    } else if (padinfo & BUTTON_RIGHT){
+    }
+    else if (padinfo & BUTTON_RIGHT){
         spr->vx += ACCELL;
     }
 
     if (padinfo & BUTTON_UP){
         spr->vy -= ACCELL;
-    } else if (padinfo & BUTTON_DOWN){
+    }
+    else if (padinfo & BUTTON_DOWN){
         spr->vy += ACCELL;
     }
 
 
     if (padinfo & BUTTON_A){
-//        SND_startPlay_XGM(bgm_game);
+        VDP_fadeIn(0, (4 * 16) - 1, palette, 20, FALSE);
     }
 
     if (padinfo & BUTTON_B){
-//        SND_playSfx_VGM(se_bullet, sizeof(se_bullet));
+        VDP_fadeOut(0, (4 * 16) - 1, 20, FALSE);
     }
 
     spr->px += spr->vx;

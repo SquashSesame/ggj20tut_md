@@ -25,7 +25,7 @@ sSprite* CreateSprite(int animno, fix32 px, fix32 py, FUNC func)
     spr->sprite = &sprites[spriteCount];
     spr->pFunc = func;
     spr->isAlive = TRUE;
-    spr->isShow =TRUE;
+    spr->isShow = TRUE;
     spr->sprno = spriteCount;
     spr->animno = spr->animno_old = animno;
     spr->px = px;
@@ -36,7 +36,7 @@ sSprite* CreateSprite(int animno, fix32 px, fix32 py, FUNC func)
         &cg_sprites,
         fix32ToInt(px),
         fix32ToInt(py),
-        TILE_ATTR(PAL2, FALSE, FALSE, FALSE));
+        TILE_ATTR(PAL2, TRUE, FALSE, FALSE));
 
     SPR_setAnim(spr->sprite, animno);
     spriteCount++;
@@ -53,7 +53,7 @@ void UpdateSprites()
     int i=0;
     for (i=0 ; i<spriteCount; ++i)
     {
-        sSprite* spr = &spriteBuf[spriteCount];
+        sSprite* spr = &spriteBuf[i];
 
         if (spr->isAlive == FALSE){
             continue;
