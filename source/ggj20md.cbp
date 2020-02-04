@@ -83,6 +83,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src/scene_logo.h" />
+		<Unit filename="src/sprite.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/sprite.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

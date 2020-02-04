@@ -1,9 +1,7 @@
-
-#include <genesis.h>
+#include "main.h"
 
 #include "gfx.h"
 #include "music.h"
-#include "main.h"
 #include "player.h"
 #include "player_heri.h"
 
@@ -33,8 +31,8 @@ void initScene_Game()
     ind += bg_b.tileset->numTile;
 #endif
 
-    initPlayer_Heri(2mmmmmmm, 9);
-    initPlayer(0, 0);
+    initPlayer_Heri(9);
+    initPlayer(0);
 
     // prepare palettes
     memcpy(&palette[0], bg_a.palette->data, 16*2);
@@ -48,9 +46,6 @@ void initScene_Game()
 
 void updateScene_Game()
 {
-    updatePlayer_Heri();
-    updatePlayer();
-
     updateBG(0, -40);
 }
 

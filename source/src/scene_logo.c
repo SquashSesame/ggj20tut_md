@@ -1,12 +1,7 @@
-/*
-    SCENE : LOGO
-    GGJÉçÉSÇï\é¶Ç∑ÇÈ
-*/
-#include <genesis.h>
+#include "main.h"
 
 #include "gfx.h"
 #include "music.h"
-#include "main.h"
 
 void initScene_Logo()
 {

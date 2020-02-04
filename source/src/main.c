@@ -1,4 +1,4 @@
-#include <genesis.h>
+#include "main.h"
 
 #include "gfx.h"
 #include "music.h"
@@ -7,7 +7,7 @@
 #include "player.h"
 #include "player_heri.h"
 
-#define LOGO_TIMER  (30 * 2)
+#define LOGO_TIMER  (30 * 4)
 // forward
 static void handleInput();
 static void joyEvent(u16 joy, u16 changed, u16 state);
@@ -15,11 +15,6 @@ static void joyEvent(u16 joy, u16 changed, u16 state);
 static void updatePhysic();
 static void updateAnim();
 static void updateCamera(fix32 x, fix32 y);
-
-// sprites structure
-Sprite sprites[MAX_SPRITE];
-u16 palette[64];
-s16 spriteCount;
 
 void joyEvent(u16 joy, u16 changed, u16 state)
 {
@@ -30,8 +25,7 @@ void joyEvent(u16 joy, u16 changed, u16 state)
 
     if (changed & state & (BUTTON_A | BUTTON_B | BUTTON_C))
     {
-//        if (movy == 0)
-//            movy = JUMP_SPEED;
+
     }
 }
 
@@ -51,8 +45,6 @@ int main()
 
  // Init sprites position
     VDP_resetSprites();
-    spriteCount = 0;
-
     SPR_init(MAX_SPRITE);
 
     VDP_setHInterrupt(0);
@@ -62,77 +54,65 @@ int main()
     JOY_setSupport(PORT_1, JOY_SUPPORT_6BTN);
     JOY_setSupport(PORT_2, JOY_SUPPORT_6BTN);
 
-    /*
-        GGJ LOGO
-    */
-    initScene_Logo();
-
-    // fade in
-    VDP_fadeIn(0, (4 * 16) - 1, palette, 20, FALSE);
-    SYS_enableInts();
-
-    int timer = LOGO_TIMER;
-    u8 isEnd = 0;
-    while(isEnd ==0)
-    {
-        updateScene_Logo();
-
-        // タイマー
-        timer--;
-        // キーに反応
-        u16 padinfo = JOY_readJoypad(JOY_1);
-        if (timer <= 0 || (padinfo & (BUTTON_A|BUTTON_B|BUTTON_C)){
-            VDP_fadeOut(0, (4 * 16) - 1, 20, FALSE);
-            isEnd = 1;
-        }
-
-        // update sprites (only one to update here)
-//        SPR_update(sprites, 1);
-
-        VDP_waitVSync();
-    }
-
-
-    SYS_disableInts();
-    // initialization
-    VDP_setScreenWidth320();
-//    VDP_setScreenWidth256();
-
-    // set all palette to black
-    VDP_setPaletteColors(0, palette_black, 64);
-
-    JOY_setEventHandler(joyEvent);
-
-    SPR_init(MAX_SPRITE);
-
-    VDP_setHInterrupt(0);
-    VDP_setHilightShadow(0);
-
-    // speed up controller checking
-    JOY_setSupport(PORT_1, JOY_SUPPORT_6BTN);
-    JOY_setSupport(PORT_2, JOY_SUPPORT_6BTN);
-
-
-    /*
-        GAME
-    */
-    initScene_Game();
-
-    // fade in
-    VDP_fadeIn(0, (4 * 16) - 1, palette, 20, FALSE);
-    SYS_enableInts();
 
     while(TRUE)
     {
-        updateScene_Game();
+        CLearAllSprite();
 
 
-        // update sprites (only one to update here)
-        if (spriteCount > 0){
-            SPR_update(sprites, spriteCount);
+        /*
+            GGJ LOGO
+        */
+        initScene_Logo();
+
+        // fade in
+        VDP_fadeIn(0, (4 * 16) - 1, palette, 20, FALSE);
+        SYS_enableInts();
+
+        int timer = LOGO_TIMER;
+        u8 isEnd = 0;
+        while(isEnd ==0)
+        {
+            updateScene_Logo();
+
+            // タイマー
+            timer--;
+            // キーに反応
+            u16 padinfo = JOY_readJoypad(JOY_1);
+            if (timer <= 0 || (padinfo & (BUTTON_A|BUTTON_B|BUTTON_C))){
+                VDP_fadeOut(0, (4 * 16) - 1, 20, FALSE);
+                isEnd = 1;
+            }
+
+            VDP_waitVSync();
         }
 
-        VDP_waitVSync();
+
+        SYS_disableInts();
+
+
+        /*
+            GAME
+        */
+        initScene_Game();
+
+        SYS_enableInts();
+        // fade in
+        VDP_fadeIn(0, (4 * 16) - 1, palette, 20, FALSE);
+
+        while(TRUE)
+        {
+            updateScene_Game();
+
+            UpdateSprites();
+
+            VDP_waitVSync();
+        }
+
+
+        VDP_fadeOut(0, (4 * 16) - 1, 20, FALSE);
+        SYS_disableInts();
+        // -> LOGO
     }
 
     return 0;
