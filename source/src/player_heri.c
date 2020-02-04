@@ -5,18 +5,12 @@
 #include "player.h"
 
 #define LIMIT_LEFT      FIX32(32)
-#define LIMIT_RIGHT     FIX32(260)
+#define LIMIT_RIGHT     FIX32(320-32)
 #define LIMIT_UP        FIX32(32)
 #define LIMIT_BOTTOM    FIX32(200)
 
-#define ACCELL  FIX32(0.01f)
-
-fix32   posx;
-fix32   posy;
-fix32   add_vx = 0.1f;
-fix32   add_vy = 0;
-int     heri_sprno;
-int     heri_animno;
+#define ACCELL          FIX32(0.01f)
+#define LIMIT_SPEED     FIX32(4.0f)
 
 #if 0
 void handleInput();
@@ -69,25 +63,29 @@ void FuncHeri(sSprite* spr)
 
     if (padinfo & BUTTON_LEFT){
         spr->vx -= ACCELL;
+        if (spr->vx < -LIMIT_SPEED) spr->vx = -LIMIT_SPEED;
     }
     else if (padinfo & BUTTON_RIGHT){
         spr->vx += ACCELL;
+        if (spr->vx > LIMIT_SPEED) spr->vx = LIMIT_SPEED;
     }
 
     if (padinfo & BUTTON_UP){
         spr->vy -= ACCELL;
+        if (spr->vy < -LIMIT_SPEED) spr->vy = -LIMIT_SPEED;
     }
     else if (padinfo & BUTTON_DOWN){
         spr->vy += ACCELL;
+        if (spr->vy > LIMIT_SPEED) spr->vy = LIMIT_SPEED;
     }
 
 
     if (padinfo & BUTTON_A){
-        VDP_fadeIn(0, (4 * 16) - 1, palette, 20, FALSE);
+//        VDP_fadeIn(0, (4 * 16) - 1, palette, 20, FALSE);
     }
 
     if (padinfo & BUTTON_B){
-        VDP_fadeOut(0, (4 * 16) - 1, 20, FALSE);
+//        VDP_fadeOut(0, (4 * 16) - 1, 20, FALSE);
     }
 
     spr->px += spr->vx;

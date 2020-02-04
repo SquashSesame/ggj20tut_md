@@ -6,6 +6,7 @@
 
 
 int     dirMissile = 2;
+int     flgPad =0;
 sSprite* sprTank;
 sSprite* sprTankHoh;
 
@@ -79,13 +80,20 @@ void funcTankHou(sSprite* spr)
 {
     u16 padinfo = JOY_readJoypad(JOY_1);
 
-    if ((padinfo & BUTTON_LEFT) && dirMissile > 0){
+    if (flgPad == 0 && (padinfo & BUTTON_LEFT) && dirMissile > 0){
+        flgPad = 1;
         dirMissile--;
         spr->animno = missileTbl[dirMissile].animno;
+//        SPR_setAnimAndFrame(spr->sprite, spr->animno, dirMissile);
     }
-    else if ((padinfo & BUTTON_RIGHT) && dirMissile < (MAX_MISSLE-1)){
+    else if (flgPad == 0 && (padinfo & BUTTON_RIGHT) && dirMissile < (MAX_MISSLE-1)){
+        flgPad = 1;
         dirMissile++;
         spr->animno = missileTbl[dirMissile].animno;
+//        SPR_setAnimAndFrame(spr->sprite, spr->animno, dirMissile);
+    }
+    else if ((padinfo & (BUTTON_LEFT|BUTTON_RIGHT)) == 0){
+        flgPad = 0;
     }
 
 
@@ -102,9 +110,13 @@ void funcTankHou(sSprite* spr)
 
 void initPlayer(int animno)
 {
-    sprTank = CreateSprite(animno, FIX32(100), FIX32(156), funcTank);
-    sprTankHoh = CreateSprite(animno+1, FIX32(100), FIX32(156), funcTankHou);
     dirMissile = 2;
+    sprTankHoh = CreateSprite(
+            missileTbl[dirMissile].animno,
+            FIX32(100), FIX32(156), funcTankHou);
+
+    sprTank = CreateSprite(
+            0, FIX32(100), FIX32(156), NULL);
 }
 
 

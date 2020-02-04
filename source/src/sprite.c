@@ -36,7 +36,7 @@ sSprite* CreateSprite(int animno, fix32 px, fix32 py, FUNC func)
         &cg_sprites,
         fix32ToInt(px),
         fix32ToInt(py),
-        TILE_ATTR(PAL2, TRUE, FALSE, FALSE));
+        TILE_ATTR(PAL2, FALSE, FALSE, FALSE));
 
     SPR_setAnim(spr->sprite, animno);
     spriteCount++;

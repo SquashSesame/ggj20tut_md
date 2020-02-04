@@ -3,9 +3,8 @@
 #include "gfx.h"
 #include "music.h"
 #include "scene_logo.h"
+#include "scene_title.h"
 #include "scene_game.h"
-#include "player.h"
-#include "player_heri.h"
 
 #define LOGO_TIMER  (30 * 4)
 // forward
@@ -73,8 +72,6 @@ int main()
         u8 isEnd = 0;
         while(isEnd ==0)
         {
-            updateScene_Logo();
-
             // タイマー
             timer--;
             // キーに反応
@@ -89,7 +86,34 @@ int main()
 
 
         SYS_disableInts();
+        CLearAllSprite();
 
+
+        /*
+            TITLE
+        */
+        initScene_Title();
+
+        // fade in
+        VDP_fadeIn(0, (4 * 16) - 1, palette, 20, FALSE);
+        SYS_enableInts();
+
+        isEnd = 0;
+        while(isEnd ==0)
+        {
+            // キーに反応
+            u16 padinfo = JOY_readJoypad(JOY_1);
+            if (padinfo & (BUTTON_START|BUTTON_A|BUTTON_B|BUTTON_C)){
+                VDP_fadeOut(0, (4 * 16) - 1, 20, FALSE);
+                isEnd = 1;
+            }
+
+            VDP_waitVSync();
+        }
+
+
+        SYS_disableInts();
+        CLearAllSprite();
 
         /*
             GAME
