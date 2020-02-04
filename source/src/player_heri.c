@@ -10,7 +10,7 @@
 #define LIMIT_BOTTOM    FIX32(200)
 
 #define ACCELL          FIX32(0.01f)
-#define LIMIT_SPEED     FIX32(4.0f)
+#define LIMIT_SPEED     FIX32(2.0f)
 
 #if 0
 void handleInput();
