@@ -107,16 +107,18 @@ void funcTankHou(sSprite* spr)
 
 }
 
+#define TANK_POS_X  FIX32(144)
+#define TANK_POS_Y  FIX32(156)
 
 void initPlayer(int animno)
 {
     dirMissile = 2;
     sprTankHoh = CreateSprite(
             missileTbl[dirMissile].animno,
-            FIX32(100), FIX32(156), funcTankHou);
+            (TANK_POS_X), (TANK_POS_Y), funcTankHou);
 
     sprTank = CreateSprite(
-            0, FIX32(100), FIX32(156), NULL);
+            0, (TANK_POS_X), (TANK_POS_Y), NULL);
 }
 
 

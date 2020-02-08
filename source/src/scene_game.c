@@ -17,14 +17,14 @@ void initScene_Game()
     // load background
     ind = TILE_USERINDEX;
     VDP_drawImageEx(
-        APLAN,
+        PLAN_A,
         &bg_a,
         TILE_ATTR_FULL(PAL0, FALSE, FALSE, FALSE, ind),
         0, 0, FALSE, TRUE);
     ind += bg_a.tileset->numTile;
 #if 1
    VDP_drawImageEx(
-        BPLAN,
+        PLAN_B,
         &bg_b,
         TILE_ATTR_FULL(PAL1, TRUE, FALSE, FALSE, ind),
         0, 0, FALSE, TRUE);

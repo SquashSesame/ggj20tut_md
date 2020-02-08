@@ -10,7 +10,7 @@ void initScene_Title()
     // load background
     ind = TILE_USERINDEX;
     VDP_drawImageEx(
-        BPLAN,
+        PLAN_B,
         &title,
         TILE_ATTR_FULL(PAL0, FALSE, FALSE, FALSE, ind), 0, 0, FALSE, TRUE);
     ind += title.tileset->numTile;

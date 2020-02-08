@@ -22,7 +22,7 @@ sSprite* CreateSprite(int animno, fix32 px, fix32 py, FUNC func)
     sSprite* spr = &spriteBuf[spriteCount];
     memset(spr, 0, sizeof(sSprite));
 
-    spr->sprite = &sprites[spriteCount];
+//    spr->sprite = &sprites[spriteCount];
     spr->pFunc = func;
     spr->isAlive = TRUE;
     spr->isShow = TRUE;
@@ -31,8 +31,7 @@ sSprite* CreateSprite(int animno, fix32 px, fix32 py, FUNC func)
     spr->px = px;
     spr->py = py;
 
-    SPR_initSprite(
-        spr->sprite,
+    spr->sprite = SPR_addSprite(
         &cg_sprites,
         fix32ToInt(px),
         fix32ToInt(py),

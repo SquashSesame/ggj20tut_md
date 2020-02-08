@@ -44,7 +44,8 @@ int main()
 
  // Init sprites position
     VDP_resetSprites();
-    SPR_init(MAX_SPRITE);
+    SPR_init();
+    SPR_reset();
 
     VDP_setHInterrupt(0);
     VDP_setHilightShadow(0);

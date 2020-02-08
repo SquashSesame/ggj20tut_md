@@ -1,10 +1,10 @@
-#ifndef _GFX_H_
-#define _GFX_H_
+#ifndef _RES_GFX_H_
+#define _RES_GFX_H_
 
+extern const SpriteDefinition cg_sprites;
 extern const Image ggj_logo;
 extern const Image title;
 extern const Image bg_a;
 extern const Image bg_b;
-extern const SpriteDefinition cg_sprites;
 
-#endif // _GFX_H_
+#endif // _RES_GFX_H_
