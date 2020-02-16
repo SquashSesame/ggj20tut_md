@@ -61,21 +61,18 @@
 		<Unit filename="res/sprites.png" />
 		<Unit filename="res/title-02.png" />
 		<Unit filename="res/title.png" />
-		<Unit filename="src/bullet.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="src/main.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src/main.h" />
-		<Unit filename="src/player.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="src/player.h" />
 		<Unit filename="src/player_heri.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src/player_heri.h" />
+		<Unit filename="src/player_tank.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="src/scene_game.c">
 			<Option compilerVar="CC" />
 		</Unit>

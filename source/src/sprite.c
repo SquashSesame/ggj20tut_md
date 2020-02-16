@@ -55,6 +55,7 @@ void UpdateSprites()
         sSprite* spr = &spriteBuf[i];
 
         if (spr->isAlive == FALSE){
+            SPR_setVisibility(spr->sprite, HIDDEN);
             continue;
         }
 
@@ -62,8 +63,8 @@ void UpdateSprites()
             spr->pFunc(spr);
         }
 
-        SPR_setAlwaysVisible(spr->sprite,
-            (spr->isShow == TRUE)? TRUE : FALSE);
+        SPR_setVisibility(spr->sprite,
+            (spr->isShow == TRUE)? VISIBLE : HIDDEN);
 
         if (spr->animno != spr->animno_old)
         {

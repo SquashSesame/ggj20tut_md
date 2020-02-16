@@ -25,6 +25,8 @@ typedef struct eSprite {
     fix32   py;
     fix32   vx;
     fix32   vy;
+    fix32   ax;
+    fix32   ay;
 } sSprite;
 
 typedef void (*FUNC)(struct eSprite* spr);
